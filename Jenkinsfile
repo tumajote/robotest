@@ -9,20 +9,7 @@ pipeline {
   }
   stages {
     stage('Result') {
-      steps {
-            step(
-    [
-    $class : 'RobotPublisher',
-    outputPath : /opt/robotframework/reports,
-    outputFileName : "*.xml",
-    disableArchiveOutput : false,
-    passThreshold : 100,
-    unstableThreshold: 95.0,
-    otherFiles : "*.png",
-
-    ]
-    )
-        }
+     sh 'echo "jotain"'
       }
 
     }
