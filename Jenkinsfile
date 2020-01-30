@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage('Result') {
       steps {
-        sh '''    step(
+        step(
     [
     $class : \'RobotPublisher\',
     outputPath : outputDirectory,
@@ -20,9 +20,7 @@ pipeline {
     passThreshold : 100,
     unstableThreshold: 95.0,
     otherFiles : "*.png",
-
     ]
-    )'''
         }
       }
 
