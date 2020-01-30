@@ -9,7 +9,11 @@ pipeline {
   }
   stages {
     stage('Result') {
-     sh 'echo "jotain"'
+      steps {
+            step(
+    sh 'echo "jotain"'
+    )
+        }
       }
 
     }
