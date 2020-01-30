@@ -3,8 +3,7 @@ pipeline {
     docker {
       image 'ppodgorsek/robot-framework'
       args '''--rm
--v data:/opt/robotframework/reports:Z
--v /var/lib/jenkins/workspace/robotest/tasks:/opt/robotframework/tests:Z'''
+-v var/lib/jenkins/workspace/robotest_master/tasks/:/opt/robotframework/tests:Z'''
     }
 
   }
@@ -14,7 +13,7 @@ pipeline {
         step(
     [
     $class : \'RobotPublisher\',
-    outputPath : outputDirectory,
+    outputPath : /opt/robotframework/reports,
     outputFileName : "*.xml",
     disableArchiveOutput : false,
     passThreshold : 100,
