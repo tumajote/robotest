@@ -10,16 +10,18 @@ pipeline {
   stages {
     stage('Result') {
       steps {
-        step(
+            step(
     [
-    $class : \'RobotPublisher\',
-    outputPath : /opt/robotframework/reports,
+    $class : 'RobotPublisher',
+    outputPath : outputDirectory,
     outputFileName : "*.xml",
     disableArchiveOutput : false,
     passThreshold : 100,
     unstableThreshold: 95.0,
     otherFiles : "*.png",
+
     ]
+    )
         }
       }
 
