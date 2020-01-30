@@ -11,7 +11,6 @@ pipeline {
     stage('Result') {
       steps {
             step(
-    sh 'echo jotain'
     )
         }
       }
