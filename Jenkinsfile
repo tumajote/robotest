@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'ppodgorsek/robot-framework'
-            args '-v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z -v /var/lib/jenkins/workspace/robotest_master/data:/opt/robotframework/reports:Z'
+            args ' -v /var/lib/jenkins/workspace/robotest_master/data:/opt/robotframework/reports:Z -v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z'
         }
     }
     stages {
