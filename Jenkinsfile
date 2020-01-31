@@ -3,13 +3,11 @@ pipeline {
   stages {
     stage('build and run') {
       steps {
-        step(
         sh "docker run --rm \
         -v data:/opt/robotframework/reports:Z \
         -v /var/jenkins_home/workspace/RoboDemo_master/tasks:/opt/robotframework/tests:Z \
         ppodgorsek/robot-framework"
-      )
-          }
+      }
     }
     stage('save') {
       steps {
