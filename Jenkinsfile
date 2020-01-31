@@ -1,14 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'ppodgorsek/robot-framework'
-            args ' -v /var/lib/jenkins/workspace/robotest_master/data:/opt/robotframework/reports:Z -v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z'
-        }
+  agent any
+  stages {
+    stage('build and run') {
+      steps {
+        sh "docker run --rm \
+        -v /var/lib/jenkins/workspace/robotest_master/data:/opt/robotframework/reports:Z \
+        -v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z \
+        ppodgorsek/robot-framework"
+      }
     }
-    stages {
-        stage('Save logs') {
-            steps {
-    step(
+    stage('save') {
+      steps {
+step(
     [
     $class : 'RobotPublisher',
     outputPath : '/var/lib/jenkins/workspace/robotest_master/data',
@@ -19,7 +22,15 @@ pipeline {
     otherFiles : "*.png",
 
     ]
-    )            }
-        }
+    )        }
     }
+
+    stage('close') {
+      steps {
+        sh "docker container prune --force"
+        sh "docker volume prune --force"
+      }
+    }
+
+  }
 }
