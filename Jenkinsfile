@@ -3,18 +3,20 @@ pipeline {
   stages {
     stage('build and run') {
       steps {
+        step(
         sh "docker run --rm \
-        -v /var/lib/jenkins/workspace/robotest_master/data:/opt/robotframework/reports:Z \
-        -v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z \
+        -v data:/opt/robotframework/reports:Z \
+        -v /var/jenkins_home/workspace/RoboDemo_master/tasks:/opt/robotframework/tests:Z \
         ppodgorsek/robot-framework"
-      }
+      )
+          }
     }
     stage('save') {
       steps {
 step(
     [
     $class : 'RobotPublisher',
-    outputPath : '/var/lib/jenkins/workspace/robotest_master/data',
+    outputPath : '/var/lib/docker/volumes/data/_data',
     outputFileName : "*.xml",
     disableArchiveOutput : false,
     passThreshold : 100,
