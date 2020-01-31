@@ -2,14 +2,24 @@ pipeline {
     agent {
         docker {
             image 'ppodgorsek/robot-framework'
-            args '-v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z'
+            args '-v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z -v data:/opt/robotframework/reports:Z'
         }
     }
     stages {
-        stage('Build') {
+        stage('Save logs') {
             steps {
-                sh 'ls -la'
-            }
+    step(
+    [
+    $class : 'RobotPublisher',
+    outputPath : outputDirectory,
+    outputFileName : "*.xml",
+    disableArchiveOutput : false,
+    passThreshold : 100,
+    unstableThreshold: 95.0,
+    otherFiles : "*.png",
+
+    ]
+    )            }
         }
     }
 }
