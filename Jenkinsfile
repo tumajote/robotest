@@ -28,7 +28,6 @@ step(
     stage('close') {
       steps {
         sh "docker container prune --force"
-        sh "docker volume prune --force"
       }
     }
 
