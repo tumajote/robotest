@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'ppodgorsek/robot-framework'
-            args '-v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z -v data:/opt/robotframework/reports:Z'
+            args '-v /var/lib/jenkins/workspace/robotest_master/tasks:/opt/robotframework/tests:Z -v /var/lib/jenkins/workspace/robotest_master/data:/opt/robotframework/reports:Z'
         }
     }
     stages {
@@ -11,7 +11,7 @@ pipeline {
     step(
     [
     $class : 'RobotPublisher',
-    outputPath : outputDirectory,
+    outputPath : '/var/lib/jenkins/workspace/robotest_master/data',
     outputFileName : "*.xml",
     disableArchiveOutput : false,
     passThreshold : 100,
