@@ -1,11 +1,16 @@
 pipeline {
   agent any
   stages {
+    stage('setup') {
+      steps {
+        sh "mkdir data"
+      }
+    }
     stage('build and run') {
       steps {
         sh "docker run --rm \
-        -v data:/opt/robotframework/reports:Z \
-        -v /var/jenkins_home/workspace/RoboDemo_master/tasks:/opt/robotframework/tests:Z \
+        -v /var/jenkins_home/workspace/robotest_master/data:/opt/robotframework/reports:Z \
+        -v /var/jenkins_home/workspace/robotest_master/tasks:/opt/robotframework/tests:Z \
         ppodgorsek/robot-framework"
       }
     }
@@ -14,7 +19,7 @@ pipeline {
 step(
     [
     $class : 'RobotPublisher',
-    outputPath : '/var/lib/docker/volumes/data/_data',
+    outputPath : '/var/jenkins_home/workspace/robotest_master/data',
     outputFileName : "*.xml",
     disableArchiveOutput : false,
     passThreshold : 100,
@@ -27,6 +32,7 @@ step(
 
     stage('close') {
       steps {
+        sh "rm -r data"
         sh "docker container prune --force"
       }
     }
