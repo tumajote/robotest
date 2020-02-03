@@ -8,7 +8,7 @@ pipeline {
     }
     stage('2') {
       steps {
-          sh "whoami"
+          sh "docker ps"
       }
     }
     stage('3') {
