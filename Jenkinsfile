@@ -3,7 +3,15 @@ pipeline {
   stages {
     stage('setup') {
       steps {
-        sh "mkdir data"
+        step(
+          sh "mkdir data"
+          )
+        step(
+          sh "whoami"
+          )
+        step(
+          sh "cat /etc/group"
+          )
       }
     }
     stage('build and run') {
