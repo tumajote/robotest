@@ -6,16 +6,6 @@ pipeline {
           sh "mkdir data"
       }
     }
-    stage('2') {
-      steps {
-          sh "docker ps"
-      }
-    }
-    stage('3') {
-      steps {
-          sh "cat /etc/group"
-      }
-    }
     stage('build and run') {
       steps {
         sh "docker run --rm \
@@ -39,13 +29,6 @@ step(
     ]
     )        }
     }
-
-    stage('Input to database') {
-      steps {
-
-             }
-    }
-
     stage('close') {
       steps {
         sh "rm -r data"
