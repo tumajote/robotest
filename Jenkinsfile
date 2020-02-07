@@ -3,7 +3,17 @@ pipeline {
   stages {
     stage('setup') {
       steps {
-        sh "mkdir data"
+          sh "mkdir data"
+      }
+    }
+    stage('2') {
+      steps {
+          sh "docker ps"
+      }
+    }
+    stage('3') {
+      steps {
+          sh "cat /etc/group"
       }
     }
     stage('build and run') {
