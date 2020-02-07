@@ -14,7 +14,7 @@ pipeline {
         ppodgorsek/robot-framework"
       }
     }
-    stage('save') {
+    stage('save robot output') {
       steps {
 step(
     [
@@ -28,6 +28,12 @@ step(
 
     ]
     )        }
+    }
+
+    stage('Input to database') {
+      steps {
+
+             }
     }
 
     stage('close') {
